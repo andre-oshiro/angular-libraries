@@ -13,10 +13,7 @@
     "eslint:fix": "eslint . --ext js,ts,json --quiet --fix",
     "lint": "npm run eslint:fix",
     "format": "prettier src/**/*.ts --write",
-    "prepare": "husky install",
-    "setup:gcloud": "echo ${GCLOUD_KEY} | base64 --decode | gcloud auth activate-service-account --key-file=- gcloud --quiet config set project ${GCLOUD_PROJECT} gcloud --quiet config set compute/zone ${GCLOUD_ZONE}",
-    "deploy": "gcloud app deploy",
-    "project:name": "echo ${PROJECT_NAME}"
+    "prepare": "husky install"
   },
   "private": true,
   "dependencies": {
