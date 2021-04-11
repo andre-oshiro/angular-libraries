@@ -5,13 +5,16 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "test": "ng test",
+    "test": "ng test angular-libraries --no-watch --browsers=ChromeHeadless",
+    "test:lazyload": "ng test lazy-load-image --no-watch --browsers=ChromeHeadless",
     "e2e": "ng e2e",
     "eslint": "eslint",
     "eslint:fix": "eslint . --ext js,ts,json --quiet --fix",
     "lint": "npm run eslint:fix",
     "format": "prettier src/**/*.ts --write",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "setup:gcloud": "$GCLOUD_KEY | base64 --decode | gcloud auth activate-service-account --key-file=- gcloud --quiet config set project ${GCLOUD_PROJECT} gcloud --quiet config set compute/zone ${GCLOUD_ZONE}",
+    "deploy": "gcloud app deploy"
   },
   "private": true,
   "dependencies": {

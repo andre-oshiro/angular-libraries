@@ -1,4 +1,4 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-npm run test -- angular-libraries --no-watch --browsers=ChromeHeadless && npm run lint && npm run format
+npm run test && npm run lint && npm run format

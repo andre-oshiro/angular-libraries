@@ -1,27 +1,55 @@
-# TODO: Add deploy
 version: 2.1
 jobs:
-  build_frontend:
-    working_directory: ~/public/
+  build:
+    working_directory: ~/public
     docker:
-      - image: circleci/node:14.04-browsers
+      - image: circleci/node:14.15.1-browsers
     steps:
       - checkout
       - run:
-          name: Update npm
-          command: 'sudo npm install -g npm@latest'
+        name: Update npm
+        command: 'sudo npm install -g npm@latest'
       - restore_cache:
-          key: dependency-cache-{{ checksum "./package-lock.json" }}
+        key: dependency-cache-{{ checksum "./package-lock.json" }}
       - run:
-          name: Setup
-          command: npm ci
+        name: Setup
+        command: npm ci
       - save_cache:
-          key: dependency-cache-{{ checksum "./package-lock.json" }}
-          paths:
-            - ~/public/.node_modules
-
+        key: dependency-cache-{{ checksum "./package-lock.json" }}
+        paths:
+          - ~/public/.node_modules
+  test:
+    working_directory: ~/public
+    docker:
+      - image: circleci/node:14.15.1-browsers
+    steps:
+      - checkout
+      - run:
+        name: Setup
+        command: npm ci
+      - run:
+        name: Test main showcase app
+        command: npm run test
+  deploy:
+    docker:
+      - image: google/cloud-sdk
+    working_directory: ~/public
+    steps:
+      - checkout
+      - run:
+          name: Setup gcloud config
+          command: npm run setup:gcloud
+      - run:
+          name: Run Deploy
+          command: npm run deploy
 workflows:
   version: 2.1
   build:
     jobs:
-      - build_frontend
+      - build
+      - test
+      - deploy:
+          name: deploy
+          filters:
+            branches:
+              only: develop
