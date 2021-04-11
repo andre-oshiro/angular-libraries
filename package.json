@@ -13,8 +13,9 @@
     "lint": "npm run eslint:fix",
     "format": "prettier src/**/*.ts --write",
     "prepare": "husky install",
-    "setup:gcloud": "$GCLOUD_KEY | base64 --decode | gcloud auth activate-service-account --key-file=- gcloud --quiet config set project ${GCLOUD_PROJECT} gcloud --quiet config set compute/zone ${GCLOUD_ZONE}",
-    "deploy": "gcloud app deploy"
+    "setup:gcloud": "${GCLOUD_KEY} | base64 --decode | gcloud auth activate-service-account --key-file=- gcloud --quiet config set project ${GCLOUD_PROJECT} gcloud --quiet config set compute/zone ${GCLOUD_ZONE}",
+    "deploy": "gcloud app deploy",
+    "project:name": "${PROJECT_NAME} && echo 'new' && echo ${PROJECT_NAME}"
   },
   "private": true,
   "dependencies": {

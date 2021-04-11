@@ -37,6 +37,9 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Check project name
+          command: npm run project:name
+      - run:
           name: Setup gcloud config
           command: npm run setup:gcloud
       - run:
@@ -47,9 +50,12 @@ workflows:
   build:
     jobs:
       - build
-      - test
+      - test:
+          requires:
+            - build
       - deploy:
-          name: deploy
+          requires:
+            - test
           filters:
             branches:
               only: develop
