@@ -1,7 +1,7 @@
 version: 2.1
 jobs:
   build:
-    working_directory: ~/public
+    working_directory: /app
     docker:
       - image: circleci/node:14.15.1-browsers
     steps:
@@ -28,11 +28,11 @@ jobs:
           name: Build Lazyload Library for test dependency
           command: npm run build:lazyload
       - persist_to_workspace:
-          root: ~/public
+          root: /app
           paths:
-            - ~/public
+            - /app
   test:
-    working_directory: ~/public
+    working_directory: /app
     docker:
       - image: circleci/node:14.15.1-browsers
     steps:
@@ -42,7 +42,7 @@ jobs:
   deploy:
     docker:
       - image: google/cloud-sdk
-    working_directory: ~/public
+    working_directory: /app
     steps:
       - checkout
       - run:
