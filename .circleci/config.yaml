@@ -30,26 +30,26 @@ jobs:
       - run:
         name: Test main showcase app
         command: npm run test
-  deploy:
-    docker:
-      - image: google/cloud-sdk
-    working_directory: ~/public
-    steps:
-      - checkout
-      - run:
-          name: Setup gcloud config
-          command: npm run setup:gcloud
-      - run:
-          name: Run Deploy
-          command: npm run deploy
+#   deploy:
+#     docker:
+#       - image: google/cloud-sdk
+#     working_directory: ~/public
+#     steps:
+#       - checkout
+#       - run:
+#           name: Setup gcloud config
+#           command: npm run setup:gcloud
+#       - run:
+#           name: Run Deploy
+#           command: npm run deploy
 workflows:
   version: 2.1
   build:
     jobs:
       - build
       - test
-      - deploy:
-          name: deploy
-          filters:
-            branches:
-              only: develop
+#       - deploy:
+#           name: deploy
+#           filters:
+#             branches:
+#               only: develop
