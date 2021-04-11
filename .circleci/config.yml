@@ -18,6 +18,12 @@ jobs:
           key: dependency-cache-{{ checksum "./package-lock.json" }}
           paths:
             - ~/public/.node_modules
+      - run:
+          name: Build Lazyload Library
+          command: npm run build:lazyload
+      - run:
+          name: Build main showcase app
+          command: npm run build
   test:
     working_directory: ~/public
     docker:
