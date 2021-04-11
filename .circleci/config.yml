@@ -29,10 +29,6 @@ jobs:
     docker:
       - image: circleci/node:14.15.1-browsers
     steps:
-      - checkout
-      - run:
-          name: Setup
-          command: npm ci
       - run:
           name: Test main showcase app
           command: npm run test
