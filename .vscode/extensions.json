@@ -1,0 +1,20 @@
+{
+  "recommendations": [
+    "johnpapa.Angular2",
+    "stylelint.vscode-stylelint",
+    "esbenp.prettier-vscode",
+    "EditorConfig.EditorConfig",
+    "mike-co.import-sorter",
+    "CoenraadS.bracket-pair-colorizer",
+    "saikou9901.evilinspector",
+    "mhutchie.git-graph",
+    "eamodio.gitlens",
+    "oderwat.indent-rainbow",
+    "chrmarti.regex",
+    "wayou.vscode-todo-highlight",
+    "streetsidesoftware.code-spell-checker",
+    "raathigeshan.fabulous",
+    "dbaeumer.vscode-eslint",
+    "angular.ng-template"
+  ]
+}

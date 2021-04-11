@@ -1,0 +1,19 @@
+{
+  "name": "@andres-oshiro/ng-lazy-load-image",
+  "version": "0.0.3",
+  "description": "A lightweight lazy load library for Angular2+",
+  "author": "Andres Oshiro",
+  "license": "MIT",
+  "keywords": [
+    "angular",
+    "lazy-load",
+    "lazy-load-image"
+  ],
+  "peerDependencies": {
+    "@angular/common": "^11.2.9",
+    "@angular/core": "^11.2.9"
+  },
+  "dependencies": {
+    "tslib": "^2.0.0"
+  }
+}

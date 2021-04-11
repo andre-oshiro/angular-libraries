@@ -119,6 +119,44 @@
           }
         }
       }
+    },
+    "lazy-load-image": {
+      "projectType": "library",
+      "root": "projects/lazy-load-image",
+      "sourceRoot": "projects/lazy-load-image/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/lazy-load-image/tsconfig.lib.json",
+            "project": "projects/lazy-load-image/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/lazy-load-image/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/lazy-load-image/src/test.ts",
+            "tsConfig": "projects/lazy-load-image/tsconfig.spec.json",
+            "karmaConfig": "projects/lazy-load-image/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/lazy-load-image/tsconfig.lib.json",
+              "projects/lazy-load-image/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
     }
   },
   "defaultProject": "angular-libraries"
