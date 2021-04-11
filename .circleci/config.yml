@@ -32,7 +32,7 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-          at: ~/build
+          at: ./
       - run:
           name: ls -a
           command: ls -a
@@ -46,7 +46,7 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-          at: ~/build
+          at: ./
       - run:
           name: Check project name
           command: echo ${PROJECT_NAME}
