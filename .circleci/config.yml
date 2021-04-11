@@ -1,10 +1,16 @@
 version: 2.1
 jobs:
-  build:
-    working_directory: /app
+  build_test:
+    working_directory: ~/
     docker:
       - image: circleci/node:14.15.1-browsers
     steps:
+      - run:
+          name: Change directory public
+          command: mkdir public && cd public
+      - run:
+          name: Change directory build
+          command: mkdir build && cd build
       - checkout
       - run:
           name: Update npm
@@ -24,15 +30,14 @@ jobs:
       - run:
           name: Build main showcase app
           command: npm run build
-      - run:
-          name: Build Lazyload Library for test dependency
-          command: npm run build:lazyload
       - persist_to_workspace:
-          root: /app
+          root: /public
           paths:
-            - /app
+            - build/*
   test:
-    working_directory: /app
+    working_directory: ~/
+    attach_workspace:
+      at: /tmp/public
     docker:
       - image: circleci/node:14.15.1-browsers
     steps:
@@ -40,9 +45,11 @@ jobs:
           name: Test main showcase app
           command: npm run test
   deploy:
+    working_directory: ~/
+    attach_workspace:
+      at: /tmp/public
     docker:
       - image: google/cloud-sdk
-    working_directory: /app
     steps:
       - checkout
       - run:
