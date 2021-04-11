@@ -1,6 +1,6 @@
 version: 2.1
 jobs:
-  build_test:
+  build:
     working_directory: ~/
     docker:
       - image: circleci/node:14.15.1-browsers
