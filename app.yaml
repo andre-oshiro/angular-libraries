@@ -1,0 +1,33 @@
+runtime: python27
+api_version: 1
+threadsafe: true
+handlers:
+- url: /
+  static_files: dist/angular-libraries/index.html
+  upload: dist/angular-libraries/index.html
+- url: /
+  static_dir: dist/angular-libraries
+
+skip_files:
+  - e2e/
+  - node_modules/
+  - src/
+  - coverage
+  - ^(.*/)?\..*$
+  - ^(.*/)?.*\.json$
+  - ^(.*/)?.*\.md$
+  - ^(.*/)?.*\.yaml$
+  - ^LICENSE
+
+instance_class: F1
+automatic_scaling:
+  target_cpu_utilization: 0.75
+  target_throughput_utilization: 0.75
+  max_instances: 1
+  min_instances: 0
+  max_idle_instances: 1
+  min_idle_instances: 0
+  min_pending_latency: 3000ms
+  max_pending_latency: 5000ms
+  max_concurrent_requests: 80
+
