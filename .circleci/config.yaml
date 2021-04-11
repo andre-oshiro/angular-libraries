@@ -1,0 +1,27 @@
+# TODO: Add deploy
+version: 2.1
+jobs:
+  build_frontend:
+    working_directory: ~/public/
+    docker:
+      - image: circleci/node:14.04-browsers
+    steps:
+      - checkout
+      - run:
+          name: Update npm
+          command: 'sudo npm install -g npm@latest'
+      - restore_cache:
+          key: dependency-cache-{{ checksum "./package-lock.json" }}
+      - run:
+          name: Setup
+          command: npm ci
+      - save_cache:
+          key: dependency-cache-{{ checksum "./package-lock.json" }}
+          paths:
+            - ~/public/.node_modules
+
+workflows:
+  version: 2.1
+  build:
+    jobs:
+      - build_frontend

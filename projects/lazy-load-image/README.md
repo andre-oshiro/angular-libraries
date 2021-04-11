@@ -1,25 +1,13 @@
-# LazyLoadImage
+<h3 align="center">@andres.oshiro/lazy-load-image</h3>
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.9.
+<p align="center">
+  A super small libary for lazy loading images for Angular apps.
+</p>
 
-## Code scaffolding
+## Contents
 
-Run `ng generate component component-name --project lazy-load-image` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project lazy-load-image`.
+- [Demo](#demo)
 
-> Note: Don't forget to add `--project lazy-load-image` or else it will be added to the default project in your `angular.json` file.
+## Demo <a name = "demo"></a>
 
-## Build
-
-Run `ng build lazy-load-image` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Publishing
-
-After building your library with `ng build lazy-load-image`, go to the dist folder `cd dist/lazy-load-image` and run `npm publish`.
-
-## Running unit tests
-
-Run `ng test lazy-load-image` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Visit this site: https://andres-oshiro-ng-libraries.an.r.appspot.com
