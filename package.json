@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:lazyload": "ng build lazy-load-image --prod",
     "test": "ng test angular-libraries --no-watch --browsers=ChromeHeadless",
     "test:lazyload": "ng test lazy-load-image --no-watch --browsers=ChromeHeadless",
     "e2e": "ng e2e",
