@@ -9,8 +9,7 @@
     "e2e": "ng e2e",
     "eslint": "eslint",
     "eslint:fix": "eslint . --ext js,ts,json --quiet --fix",
-    "tsc": "tsc --noEmit ",
-    "lint": "npm run tsc && npm run eslint:fix",
+    "lint": "npm run eslint:fix",
     "format": "prettier src/**/*.ts --write",
     "prepare": "husky install"
   },
