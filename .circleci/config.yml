@@ -51,11 +51,8 @@ jobs:
           name: Check project name
           command: echo ${PROJECT_NAME}
       - run:
-          name: Check project name2
-          command: ${PROJECT_NAME}
-      - run:
           name: Setup gcloud config
-          command: ${GCLOUD_KEY} | base64 --decode | gcloud auth activate-service-account --key-file=- gcloud --quiet config set project ${GCLOUD_PROJECT} gcloud --quiet config set compute/zone ${GCLOUD_ZONE}
+          command: echo ${GCLOUD_KEY} | base64 --decode | gcloud auth activate-service-account --key-file=- gcloud --quiet config set project ${GCLOUD_PROJECT} gcloud --quiet config set compute/zone ${GCLOUD_ZONE}
       - run:
           name: Run Deploy
           command: gcloud app deploy
