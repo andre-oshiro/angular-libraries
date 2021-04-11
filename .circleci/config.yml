@@ -1,16 +1,10 @@
 version: 2.1
 jobs:
   build:
-    working_directory: ~/
+    working_directory: ~/build
     docker:
       - image: circleci/node:14.15.1-browsers
     steps:
-      - run:
-          name: Change directory public
-          command: mkdir public && cd public
-      - run:
-          name: Change directory build
-          command: mkdir build && cd build
       - checkout
       - run:
           name: Update npm
@@ -20,10 +14,6 @@ jobs:
       - run:
           name: Setup
           command: npm ci
-      - save_cache:
-          key: dependency-cache-{{ checksum "./package-lock.json" }}
-          paths:
-            - ~/public/.node_modules
       - run:
           name: Build Lazyload Library
           command: npm run build:lazyload
@@ -31,16 +21,18 @@ jobs:
           name: Build main showcase app
           command: npm run build
       - persist_to_workspace:
-          root: /public
+          root: ./
           paths:
-            - build/*
+            - dist
+            - node_modules
   test:
-    working_directory: ~/
+    working_directory: ~/test
     docker:
       - image: circleci/node:14.15.1-browsers
     steps:
+      - checkout
       - attach_workspace:
-          at: /tmp/public
+          at: ~/build
       - run:
           name: ls -a
           command: ls -a
@@ -48,12 +40,13 @@ jobs:
           name: Test main showcase app
           command: npm run test
   deploy:
-    working_directory: ~/
+    working_directory: ~/deploy
     docker:
       - image: google/cloud-sdk
     steps:
+      - checkout
       - attach_workspace:
-          at: /tmp/public
+          at: ~/build
       - run:
           name: Check project name
           command: echo ${PROJECT_NAME}
