@@ -36,22 +36,24 @@ jobs:
             - build/*
   test:
     working_directory: ~/
-    attach_workspace:
-      at: /tmp/public
     docker:
       - image: circleci/node:14.15.1-browsers
     steps:
+      - attach_workspace:
+          at: /tmp/public
+      - run:
+          name: ls -a
+          command: ls -a
       - run:
           name: Test main showcase app
           command: npm run test
   deploy:
     working_directory: ~/
-    attach_workspace:
-      at: /tmp/public
     docker:
       - image: google/cloud-sdk
     steps:
-      - checkout
+      - attach_workspace:
+          at: /tmp/public
       - run:
           name: Check project name
           command: echo ${PROJECT_NAME}
