@@ -1,27 +1,23 @@
-# AngularLibraries
+<h1 align="center">an-*ngLibraries</h1>
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.8.
+<p align="center">
+  <br>
+    <i>a project to create lightweight Angular libraries</i>
+  <br>
+</p>
 
-## Development server
+<p align="center">
+  <a href="https://andres-oshiro-ng-libraries.an.r.appspot.com"><strong>www.an-nglibraries.com</strong></a>
+  <br>
+</p>
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+<div align="center">
 
-## Code scaffolding
+[![Status](https://img.shields.io/badge/status-active-success.svg)]()
+![npm](https://img.shields.io/npm/dw/@andres-oshiro/ng-lazy-load-image.svg)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
+[![CircleCI](https://circleci.com/gh/andre-oshiro/angular-libraries.svg?style=shield)](https://circleci.com/gh/circleci/circleci-docs/tree/teesloane-patch-5)</div>
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Demo
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Visit the [demo page](https://andres-oshiro-ng-libraries.an.r.appspot.com).

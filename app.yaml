@@ -3,11 +3,21 @@ api_version: 1
 threadsafe: true
 
 handlers:
-- url: /.*
+- url: /(.*\.(.+))$
+  secure: always
+  redirect_http_response_code: 301
+  static_files: dist/angular-libraries/\1
+  upload: dist/angular-libraries/(.*\.(.+))$
+
+- url: /(.+)
+  secure: always
   static_files: dist/angular-libraries/index.html
   upload: dist/angular-libraries/index.html
+
 - url: /
-  static_dir: dist/angular-libraries
+  secure: always
+  static_files: dist/angular-libraries/index.html
+  upload: dist/angular-libraries/index.html
 
 skip_files:
   - e2e/
