@@ -23,6 +23,10 @@
 
 Visit the [demo page](https://andres-oshiro-ng-libraries.an.r.appspot.com/lazy-image).
 
+## Source code
+
+Github [repository](https://github.com/andre-oshiro/angular-libraries/tree/develop/projects/lazy-load-image).
+
 ## Installation
 
 ```sh
@@ -65,13 +69,46 @@ export class SampleListComponent {
 
 ## Old Browser
 
-To support old browsers you will need to install an intersection observer polyfill.
+**anLazyLoadImage** uses IntersectionObserver internally. To support old browsers you will need to install IntersectionObserver polyfill.
+
+<table>
+  <tr>
+    <td align="center">
+      <img src="https://raw.github.com/alrra/browser-logos/39.2.2/src/chrome/chrome_48x48.png" alt="Chrome"><br>
+      ✔
+    </td>
+    <td align="center">
+      <img src="https://raw.github.com/alrra/browser-logos/39.2.2/src/firefox/firefox_48x48.png" alt="Firefox"><br>
+      ✔
+    </td>
+    <td align="center">
+      <img src="https://raw.github.com/alrra/browser-logos/39.2.2/src/safari/safari_48x48.png" alt="Safari"><br>
+      6+
+    </td>
+    <td align="center">
+      <img src="https://raw.github.com/alrra/browser-logos/39.2.2/src/edge/edge_48x48.png" alt="Edge"><br>
+      ✔
+    </td>
+    <td align="center">
+      <img src="https://raw.github.com/alrra/browser-logos/39.2.2/src/archive/internet-explorer_7-8/internet-explorer_7-8_48x48.png" alt="Internet Explorer"><br>
+      7+
+    </td>
+    <td align="center">
+      <img src="https://raw.github.com/alrra/browser-logos/39.2.2/src/opera/opera_48x48.png" alt="Opera"><br>
+      ✔
+    </td>
+    <td align="center">
+      <img src="https://raw.github.com/alrra/browser-logos/39.2.2/src/android/android_48x48.png" alt="Android"><br>
+      4.4+
+    </td>
+  </tr>
+</table>
 
 ```sh
 npm install intersection-observer
 ```
 
-After install, import it at polyfill.ts
+After install, import it at Angular's polyfill.ts
 
 ```ts
 /**********************************************************
