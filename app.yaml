@@ -1,8 +1,9 @@
 runtime: python27
 api_version: 1
 threadsafe: true
+
 handlers:
-- url: /
+- url: /.*
   static_files: dist/angular-libraries/index.html
   upload: dist/angular-libraries/index.html
 - url: /

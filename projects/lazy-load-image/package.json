@@ -1,6 +1,6 @@
 {
   "name": "@andres-oshiro/ng-lazy-load-image",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "A lightweight lazy load library for Angular2+",
   "author": "Andres Oshiro",
   "homepage": "https://andres-oshiro-ng-libraries.an.r.appspot.com",
