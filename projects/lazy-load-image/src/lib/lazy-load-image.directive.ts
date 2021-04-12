@@ -17,7 +17,7 @@ import { LazyLoadOptions } from './lazy-load-image.model';
  * @implements {OnInit}
  */
 @Directive({
-  selector: 'img[appLazyLoadImage]'
+  selector: 'img[anLazyLoadImage]'
 })
 export class LazyLoadImageDirective implements OnInit, OnDestroy {
   constructor(private elementRef: ElementRef, private renderer: Renderer2) {

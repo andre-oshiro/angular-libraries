@@ -124,7 +124,7 @@
       "projectType": "library",
       "root": "projects/lazy-load-image",
       "sourceRoot": "projects/lazy-load-image/src",
-      "prefix": "lib",
+      "prefix": "an",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
