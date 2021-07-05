@@ -103,6 +103,16 @@ export class LazyLoadImageDirective implements OnInit, OnDestroy {
   ): void {
     for (const entry of entries) {
       if (!entry?.isIntersecting) {
+        if (!this.imgSrc) {
+          this.renderer.setAttribute(
+            element,
+            'src',
+            this.lazyLoadOptions?.onErrorImgSrc
+              ? this.lazyLoadOptions?.onErrorImgSrc
+              : this.onErrorImgSrc
+          );
+          observer.unobserve(element);
+        }
         return;
       }
       this.renderer.setAttribute(element, 'src', this.imgSrc);
