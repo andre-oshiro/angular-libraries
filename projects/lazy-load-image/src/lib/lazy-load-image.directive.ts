@@ -129,6 +129,9 @@ export class LazyLoadImageDirective implements OnInit, OnDestroy {
    * DIRECTIVE: On Error
    */
   private onError(): void {
+    if (this.lazyLoadOptions?.onErrorImgSrc) {
+      this.onErrorImgSrc = this.lazyLoadOptions?.onErrorImgSrc;
+    }
     this.renderer.setAttribute(
       this.elementRef.nativeElement,
       'src',
