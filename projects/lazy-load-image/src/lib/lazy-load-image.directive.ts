@@ -20,13 +20,11 @@ import { LazyLoadOptions } from './lazy-load-image.model';
   selector: 'img[anLazyLoadImage]'
 })
 export class LazyLoadImageDirective implements OnInit, OnDestroy {
-  constructor(private elementRef: ElementRef, private renderer: Renderer2) {
-    this.elementRef.nativeElement.style.opacity = this.INITIAL_IMAGE_OPACITY;
-  }
+  constructor(private elementRef: ElementRef, private renderer: Renderer2) {}
   /** CONSTANT: Default image on error */
   private readonly DEFAULT_ERROR_IMG_BASE64 = `data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7`;
-  /** CONSTANT: DOpacity for fade in when image load */
-  private readonly INITIAL_IMAGE_OPACITY = '0.1';
+  /** CONSTANT: Opacity for fade in when image load */
+  private readonly INITIAL_FADE_IN_OPACITY = '0.1';
   /** VARIABLE: Observer for an img element */
   private intersectionObserver: IntersectionObserver = <IntersectionObserver>{};
   /** VARIABLE: Image on error */
@@ -48,6 +46,7 @@ export class LazyLoadImageDirective implements OnInit, OnDestroy {
    * ANGULAR LIFECYCLE: Init
    */
   public ngOnInit(): void {
+    this.initialSetting();
     this.startObservingLazyLoadImages();
   }
 
@@ -56,6 +55,15 @@ export class LazyLoadImageDirective implements OnInit, OnDestroy {
    */
   public ngOnDestroy(): void {
     this.intersectionObserver.disconnect();
+  }
+
+  /**
+   * DIRECTIVE: Initial setting
+   */
+  private initialSetting(): void {
+    if (this.lazyLoadOptions?.hasFadeInEffect) {
+      this.elementRef.nativeElement.style.opacity = '0.1';
+    }
   }
 
   /**
@@ -107,7 +115,7 @@ export class LazyLoadImageDirective implements OnInit, OnDestroy {
    */
   private imageFadeIn(): void {
     const element = this.elementRef.nativeElement;
-    let opacity = Number(this.INITIAL_IMAGE_OPACITY);
+    let opacity = Number(this.INITIAL_FADE_IN_OPACITY);
     const intervalTimer = setInterval(() => {
       if (Number(opacity) >= 1) {
         clearInterval(intervalTimer);
@@ -122,6 +130,9 @@ export class LazyLoadImageDirective implements OnInit, OnDestroy {
    * DIRECTIVE: On Loaded
    */
   private onLoad(): void {
+    if (!this.lazyLoadOptions?.hasFadeInEffect) {
+      return;
+    }
     this.imageFadeIn();
   }
 
@@ -129,13 +140,12 @@ export class LazyLoadImageDirective implements OnInit, OnDestroy {
    * DIRECTIVE: On Error
    */
   private onError(): void {
-    if (this.lazyLoadOptions?.onErrorImgSrc) {
-      this.onErrorImgSrc = this.lazyLoadOptions?.onErrorImgSrc;
-    }
     this.renderer.setAttribute(
       this.elementRef.nativeElement,
       'src',
-      this.onErrorImgSrc
+      this.lazyLoadOptions?.onErrorImgSrc
+        ? this.lazyLoadOptions?.onErrorImgSrc
+        : this.onErrorImgSrc
     );
   }
 }

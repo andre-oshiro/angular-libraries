@@ -11,7 +11,8 @@ import { DummyData } from './card-list-dummy-data';
 export class CardListComponent {
   public readonly DUMMY_DATA: DummyData[] = [];
   public readonly lazyLoadOptions: LazyLoadOptions = {
-    threshold: [0.5]
+    threshold: [0.5],
+    hasFadeInEffect: false
   };
   constructor() {
     for (let i = 0; i < 50; i++) {

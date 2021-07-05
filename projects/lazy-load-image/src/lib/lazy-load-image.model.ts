@@ -3,4 +3,5 @@
  */
 export interface LazyLoadOptions extends IntersectionObserverInit {
   onErrorImgSrc?: string;
+  hasFadeInEffect?: boolean;
 }
