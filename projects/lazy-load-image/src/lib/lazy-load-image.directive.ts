@@ -111,6 +111,18 @@ export class LazyLoadImageDirective implements OnInit, OnDestroy {
   }
 
   /**
+   * DIRECTIVE: Determinate if entry is intersecting
+   */
+  private isIntersecting(entry: IntersectionObserverEntry): boolean {
+    return (
+      entry.isIntersecting ||
+      entry.intersectionRatio !== 0 ||
+      entry.intersectionRect.x !== 0 ||
+      entry.intersectionRect.y !== 0
+    );
+  }
+
+  /**
    * DIRECTIVE: Process of Observing element
    */
   private observingElementProcess(
@@ -119,14 +131,7 @@ export class LazyLoadImageDirective implements OnInit, OnDestroy {
     observer: IntersectionObserver
   ): void {
     for (const entry of entries) {
-      console.info('isIntersecting', entry.isIntersecting);
-      console.info('intersectionRect', entry.intersectionRect);
-      console.info('intersectionRatio', entry.intersectionRatio);
-      if (
-        entry.isIntersecting ||
-        entry.intersectionRatio !== 0 ||
-        entry.intersectionRect.x !== 0
-      ) {
+      if (this.isIntersecting(entry)) {
         const img = this.imgSrc ? this.imgSrc : this.onErrorImgSrc;
         this.renderer.setAttribute(element, 'src', img);
         observer.unobserve(element);
