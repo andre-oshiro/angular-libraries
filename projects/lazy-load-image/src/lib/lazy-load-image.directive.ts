@@ -8,7 +8,6 @@ import {
   Renderer2
 } from '@angular/core';
 import { LazyLoadOptions } from './lazy-load-image.model';
-
 /**
  * LAZY LOAD IMAGE
  *
@@ -61,9 +60,27 @@ export class LazyLoadImageDirective implements OnInit, OnDestroy {
    * DIRECTIVE: Initial setting
    */
   private initialSetting(): void {
-    if (this.lazyLoadOptions?.hasFadeInEffect) {
-      this.elementRef.nativeElement.style.opacity = '0.1';
+    this.setImgElementOpacity();
+    this.setOnErrorImgSrc();
+  }
+
+  /**
+   * DIRECTIVE: Set img element opacity
+   */
+  private setImgElementOpacity(): void {
+    if (!this.lazyLoadOptions?.hasFadeInEffect) {
+      return;
     }
+    this.elementRef.nativeElement.style.opacity = '0.1';
+  }
+
+  /**
+   * DIRECTIVE: Set img error src
+   */
+  private setOnErrorImgSrc(): void {
+    this.onErrorImgSrc = this.lazyLoadOptions?.onErrorImgSrc
+      ? this.lazyLoadOptions?.onErrorImgSrc
+      : this.onErrorImgSrc;
   }
 
   /**
@@ -81,7 +98,7 @@ export class LazyLoadImageDirective implements OnInit, OnDestroy {
   private getIntersectionObserver(
     element: HTMLImageElement
   ): IntersectionObserver {
-    const observingElementProcess = (
+    const observingElementProcess: IntersectionObserverCallback = (
       entries: IntersectionObserverEntry[],
       observer: IntersectionObserver
     ) => {
@@ -102,21 +119,18 @@ export class LazyLoadImageDirective implements OnInit, OnDestroy {
     observer: IntersectionObserver
   ): void {
     for (const entry of entries) {
-      if (!entry?.isIntersecting) {
-        if (!this.imgSrc) {
-          this.renderer.setAttribute(
-            element,
-            'src',
-            this.lazyLoadOptions?.onErrorImgSrc
-              ? this.lazyLoadOptions?.onErrorImgSrc
-              : this.onErrorImgSrc
-          );
-          observer.unobserve(element);
-        }
-        return;
+      console.info('isIntersecting', entry.isIntersecting);
+      console.info('intersectionRect', entry.intersectionRect);
+      console.info('intersectionRatio', entry.intersectionRatio);
+      if (
+        entry.isIntersecting ||
+        entry.intersectionRatio !== 0 ||
+        entry.intersectionRect.x !== 0
+      ) {
+        const img = this.imgSrc ? this.imgSrc : this.onErrorImgSrc;
+        this.renderer.setAttribute(element, 'src', img);
+        observer.unobserve(element);
       }
-      this.renderer.setAttribute(element, 'src', this.imgSrc);
-      observer.unobserve(element);
     }
   }
 
@@ -124,6 +138,9 @@ export class LazyLoadImageDirective implements OnInit, OnDestroy {
    * DIRECTIVE: Fade in effect for loaded image
    */
   private imageFadeIn(): void {
+    if (!this.lazyLoadOptions?.hasFadeInEffect) {
+      return;
+    }
     const element = this.elementRef.nativeElement;
     let opacity = Number(this.INITIAL_FADE_IN_OPACITY);
     const intervalTimer = setInterval(() => {
@@ -140,9 +157,6 @@ export class LazyLoadImageDirective implements OnInit, OnDestroy {
    * DIRECTIVE: On Loaded
    */
   private onLoad(): void {
-    if (!this.lazyLoadOptions?.hasFadeInEffect) {
-      return;
-    }
     this.imageFadeIn();
   }
 
@@ -153,9 +167,7 @@ export class LazyLoadImageDirective implements OnInit, OnDestroy {
     this.renderer.setAttribute(
       this.elementRef.nativeElement,
       'src',
-      this.lazyLoadOptions?.onErrorImgSrc
-        ? this.lazyLoadOptions?.onErrorImgSrc
-        : this.onErrorImgSrc
+      this.onErrorImgSrc
     );
   }
 }
