@@ -36,7 +36,7 @@ npm i @andres-oshiro/ng-lazy-load-image
 ## Usage
 
 ```html
-<img anLazyLoadImage [imgSrc]="${imgUrl}" />
+<img anLazyLoadImage [imgSrc]="${imgSrc}" />
 ```
 
 ### Options
@@ -49,7 +49,7 @@ You can pass as option a **root element**, **root margin** and **threshold**.
 <div id="root">
   ...
 
-  <img anLazyLoadImage [lazyLoadOptions]="OPTIONS" [imgSrc]="${imgUrl}" />
+  <img anLazyLoadImage [lazyLoadOptions]="OPTIONS" [imgSrc]="${imgSrc}" />
 </div>
 ```
 
@@ -62,14 +62,16 @@ export class SampleListComponent {
     onErrorImgSrc: this.errorImageSrc,
     root: this.document.querySelector('#root'),
     rootMargin: '0px 0px 0px 0px',
-    threshold: 0.5
+    threshold: [0.5],
+    hasFadeInEffect: true
   };
 }
 ```
 
 ## Old Browser
 
-**anLazyLoadImage** uses IntersectionObserver internally. To support old browsers you will need to install IntersectionObserver polyfill.
+**anLazyLoadImage** uses IntersectionObserver internally. 
+To support old browsers you will need to install IntersectionObserver polyfill.
 
 ```sh
 npm install intersection-observer
@@ -85,6 +87,6 @@ After install, import it at Angular's polyfill.ts
 import 'intersection-observer';
 ```
 
-## \*
+## Consider
 
-If your project only needs to support the latest version of Chrome, you can use the browser's native lazy loading.
+If your project only needs to support the latest version of Chrome, maybe you can use the browser's native lazy loading.
